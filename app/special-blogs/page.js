@@ -23,23 +23,19 @@ export default async function Page() {
     const user = JSON.parse(headersList.get("user"));
     const blogs = await fetchSpecialBlogs();
 
-    // console.log(blog.attributes.thumbnail, 'blog');
-
     return (
         <div className='container mx-auto'>
-            <div>Hello {user.email}</div>
+            <div className="text-2xl mb-2">Special {user.email}</div>
             <div className='grid grid-cols-3 gap-2'>
-                {blogs.map((blog) => (
-                    <div className='flex flex-col'>
-                        {
-                            <div className='flex flex-col'>
-                                <div className='text-2xl'>ID: {blog.id}</div>
-                                <div className='text-2xl'>{blog.attributes.title}</div>
-                                <div className='text-1xl'>{blog.attributes.description}</div>
-                            </div>
-                        }
-                    </div>
-                ))}
+                {
+                    blogs && blogs.map((blog, index) => (
+                        <div className='flex flex-col' key={index}>
+                            <div className='text-2xl'>ID: {blog.id}</div>
+                            <div className='text-2xl'>Title : {blog.attributes.title}</div>
+                            <div className='text-2xl'>Description : {blog.attributes.description}</div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );
